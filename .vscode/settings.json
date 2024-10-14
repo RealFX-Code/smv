@@ -1,0 +1,7 @@
+{
+    "C_Cpp.default.compileCommands": "c:\\Users\\Leah\\source\\smv\\builddir/compile_commands.json",
+    "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild",
+    "files.associations": {
+        "xstring": "cpp"
+    }
+}

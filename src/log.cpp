@@ -1,6 +1,13 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <filesystem>
+#include <sys/stat.h>
+
+#if defined(WIN32)
+#include <Windows.h>
+#endif
 
 #include "log.h"
 
@@ -41,8 +48,42 @@ void Log(LOG_LEVEL level, std::string msg) {
     }
 
     // Begin log
-    std::cout << "[" << currentDateTime() << "] [" << LOG_LEVEL_STRING << "] " << msg << std::endl;
+    
+    char FormattedOutput[32768];
+    // currentDateTime() -> std::String
+    // LOG_LEVEL_STRING  -> std::String
+    // msg               -> std::String
+    sprintf(FormattedOutput, "[%s] -> [%s] %s\n",currentDateTime(), LOG_LEVEL_STRING, msg);
+    std::string FormattedOutput_s(FormattedOutput);
+
+    std::cout << FormattedOutput_s;
+
+    std::ofstream FileStream;
+
+    FileStream.open("logs/latest.log");
+    FileStream << FormattedOutput_s;
+    FileStream.close();
 
 }
 
-void SetupLogs();
+void SetupLogs() {
+    // TODO: impl log dir creation and moving "latest.log" to "<date>.log"
+
+    struct stat sb;
+
+    if(stat("logs", &sb) != 0) {
+        std::cout << "WARNING: Log directory doesn't exist, making it now!" << std::endl;
+    }
+
+    #if defined(WIN32)
+    
+    CreateDirectory("logs",NULL)
+
+    #elif(UNIX)
+    
+    mkdir("logs/")
+
+    #endif
+
+    return;
+}

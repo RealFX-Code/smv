@@ -8,8 +8,8 @@
 #include <cstdlib>
 #include <vector>
 
-const uint32_t WIDTH = 800;
-const uint32_t HEIGHT = 600;
+const uint32_t WIDTH = 1280;
+const uint32_t HEIGHT = 720;
 
 class MainApplication {
 public:

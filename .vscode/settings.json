@@ -3,5 +3,6 @@
     "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild",
     "files.associations": {
         "xstring": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

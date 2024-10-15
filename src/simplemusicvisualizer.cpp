@@ -15,6 +15,10 @@
 #include <glm/mat4x4.hpp>
 
 int main(int argc, char **argv) {
+
+    // Initialize logging
+    SetupLogs();
+
     char StartingMsg[100];
     sprintf_s(StartingMsg, sizeof(StartingMsg), "Starting %s!", PROJECT_NAME);
     std::string StartingMsg_s(StartingMsg);

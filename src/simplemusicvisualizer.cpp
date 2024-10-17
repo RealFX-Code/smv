@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "log.h"
+#include "spdlog/spdlog.h"
 
 // Including source files feels so wrong
 #include "MainApplication.cpp"
@@ -16,29 +16,18 @@
 
 int main(int argc, char **argv) {
 
-    // Initialize logging
-    SetupLogs();
-
-    char StartingMsg[100];
-    sprintf_s(StartingMsg, sizeof(StartingMsg), "Starting %s!", PROJECT_NAME);
-    std::string StartingMsg_s(StartingMsg);
-    Log(INFO, StartingMsg_s);
+    spdlog::info("Starting {}!",PROJECT_NAME);
 
     uint32_t extensionCount = 0;
     vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
-
-// Log
-    char ExtentionCountMsg[100];
-    sprintf_s(ExtentionCountMsg, sizeof(ExtentionCountMsg), "%u extensions supported!", extensionCount);
-    std::string ExtentionCountMsg_s(ExtentionCountMsg);
-    Log(INFO, ExtentionCountMsg_s);
+    spdlog::info("{} vulkan extensions supported.", extensionCount);
 
     MainApplication app;
 
     try {
         app.run();
     } catch (const std::exception& e) {
-        Log(FATAL, e.what());
+        spdlog::critical("%s\n",e.what());
         return EXIT_FAILURE;
     }
 

@@ -1,7 +1,7 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
-#include "log.h"
+#include "spdlog/spdlog.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -68,7 +68,7 @@ private:
         createInfo.enabledLayerCount = 0;
 
         if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS) {
-            Log(FATAL, "Failed to create vulkan instance!");
+            spdlog::critical("Failed to create vulkan context! Check you drivers.");
         }
     }
 

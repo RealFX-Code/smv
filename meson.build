@@ -5,15 +5,17 @@ project('SimpleMusicVisualizer', 'cpp',
 
 deps = [
   dependency('vulkan'),
+  dependency('spdlog'),
   dependency('glfw3'),
   dependency('glm')
 ]
 
-include = include_directories('src/include')
+include = include_directories([
+  'src/include'
+])
 
 source_files = [
   'src/simplemusicvisualizer.cpp',
-  'src/log.cpp',
   'src/MainApplication.cpp',
 ]
 
